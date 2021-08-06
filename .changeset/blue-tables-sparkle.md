@@ -1,6 +1,5 @@
 ---
 '@backstage/plugin-home': minor
-'example-app': patch
 ---
 
 Create the `Home` plugin which exports some basic functionality that's used to compose a homepage. An example of a composed homepage is added to the example app.
