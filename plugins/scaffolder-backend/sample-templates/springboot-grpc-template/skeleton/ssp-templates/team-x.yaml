@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-{{cookiecutter.owner}}
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: team-{{cookiecutter.owner}}
+    server: EKS-Server
+  project: default
+  source:
+    repoURL: https://github.com/{{cookiecutter.owner}}/argo-apps
+    path: teams/team-{{cookiecutter.owner}}/{{cookiecutter.environment}}    
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true

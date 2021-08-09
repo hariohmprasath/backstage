@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{cookiecutter.k8sDeploymentName}}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{cookiecutter.k8sDeploymentName}}
+  template:
+    metadata:
+      labels:
+        app: {{cookiecutter.k8sDeploymentName}}
+    spec:
+      containers:
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: {{cookiecutter.k8sDeploymentName}}
+        ports:
+        - containerPort: {{cookiecutter.k8sServicePort}}

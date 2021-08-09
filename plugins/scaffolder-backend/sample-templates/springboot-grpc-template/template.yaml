@@ -18,6 +18,10 @@ spec:
         - component_id
         - owner
         - java_package_name
+        # - k8sServiceName
+        # - k8sDeploymentName
+        # - k8sServicePort
+        # - environment
       properties:
         component_id:
           title: Name
@@ -31,6 +35,22 @@ spec:
           title: Description
           type: string
           description: Help others understand what this website is for.
+        k8sServiceName:
+          title: Kubernetes Service name
+          type: string
+          description: Name of the kubernetes service          
+        k8sDeploymentName:
+          title: Kubernetes Deployment name
+          type: string
+          description: Name of the kubernetes deployment
+        k8sServicePort:
+          title: Service Port
+          type: integer 
+          description: Port number that needs to be exposed
+        environment:
+          title: Name of the environment
+          type: string
+          description: Argo name of the environment   
         owner:
           title: Owner
           type: string
@@ -56,6 +76,7 @@ spec:
       name: Fetch Skeleton + Template
       action: fetch:cookiecutter
       input:
+        targetPath: codebase
         url: ./skeleton
         copyWithoutRender:
           - .github/workflows/*
@@ -66,14 +87,37 @@ spec:
           java_package_name: '{{ parameters.java_package_name }}'
           owner: '{{ parameters.owner }}'
           destination: '{{ parseRepoUrl parameters.repoUrl }}'
-          http_port: 8080
-
+          k8sServiceName: '{{ parameters.k8sServiceName }}'
+          k8sDeploymentName: '{{ parameters.k8sDeploymentName }}'
+          k8sServicePort: '{{ parameters.k8sServicePort }}'
+          environment: '{{ parameters.environment }}'          
+          http_port: 8080      
+    - id: ssp-template
+      name: SSP Template Fetch
+      action: fetch:cookiecutter
+      input:
+        targetPath: codebase/ssp
+        url: https://github.com/hariohmprasath/ssp-eks-workloads
+        copyWithoutRender:
+          - .github/workflows/*  
+          - envs/*      
+    - id: ssp-copy
+      name: SSP Setup
+      action: fs:ssp
+      input:
+        targetPath: codebase/ssp
+        values:
+          owner: '{{ parameters.owner }}'
+          environment: '{{ parameters.environment }}'    
+          k8sServiceName: '{{ parameters.k8sServiceName }}'
+          k8sDeploymentName: '{{ parameters.k8sDeploymentName }}'    
+   
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: 'This is {{ parameters.component_id }}'
+        description: 'Repo for {{ parameters.k8sServiceName }} with {{ parameters.k8sDeploymentName }} deployment'
         repoUrl: '{{ parameters.repoUrl }}'
 
     - id: register
