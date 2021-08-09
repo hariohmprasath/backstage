@@ -1,5 +1,13 @@
 # @backstage/backend-common
 
+## 0.8.9
+
+### Patch Changes
+
+- f7ce7c565: Use a more informative error message when URL reading isn't allowed due to no reader matching the target URL.
+- Updated dependencies
+  - @backstage/integration@0.5.10
+
 ## 0.8.8
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @backstage/plugin-catalog-react
 
+## 0.4.2
+
+### Patch Changes
+
+- 56c773909: Switched `@types/react` dependency to request `*` rather than a specific version.
+- Updated dependencies
+  - @backstage/core-app-api@0.1.8
+  - @backstage/core-components@0.3.1
+  - @backstage/core-plugin-api@0.1.6
+  - @backstage/integration@0.5.10
+
 ## 0.4.1
 
 ### Patch Changes

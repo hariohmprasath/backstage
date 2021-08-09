@@ -1,5 +1,15 @@
 # @backstage/plugin-git-release-manager
 
+## 0.2.3
+
+### Patch Changes
+
+- 56c773909: Switched `@types/react` dependency to request `*` rather than a specific version.
+- Updated dependencies
+  - @backstage/core-components@0.3.1
+  - @backstage/core-plugin-api@0.1.6
+  - @backstage/integration@0.5.10
+
 ## 0.2.2
 
 ### Patch Changes

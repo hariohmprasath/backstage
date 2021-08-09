@@ -1,5 +1,12 @@
 # @backstage/integration
 
+## 0.5.10
+
+### Patch Changes
+
+- 68af4d556: Adds an allow list of GitHub installations
+- 5fd31c2f4: Remove repo restriction from GitHub credentials provider
+
 ## 0.5.9
 
 ### Patch Changes
